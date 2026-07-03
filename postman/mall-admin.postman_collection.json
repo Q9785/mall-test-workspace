@@ -1,0 +1,574 @@
+{
+  "info": {
+    "_postman_id": "e5e52c54-c26e-4777-9762-54e6823f9ecd",
+    "name": "mall-admin",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55951417",
+    "_collection_link": "https://go.postman.co/collection/55951417-e5e52c54-c26e-4777-9762-54e6823f9ecd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "用户登录",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"登录成功\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.code).to.eql(200);\r",
+              "});\r",
+              "var jsonData = pm.response.json();\r",
+              "pm.environment.set(\"admin_token\", jsonData.data.token);\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"admin\",\"password\":\"macro123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/admin/login",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "admin",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "错误密码登录",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"admin\",\"password\":\"123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/admin/login",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "admin",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "新增商品",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"brandId\": 26,\"name\": \"测试商品\",\"originalPrice\": 3788,\"price\": 3788,\"productCategoryId\": 26,\"productSn\": \"TEST001\",\"stock\": 100,\"unit\": \"件\",\"publishStatus\": 1,\"deleteStatus\": 0}"
+        },
+        "url": {
+          "raw": "{{url}}/product/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "新增商品（名称为空）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"brandId\": 26,\"name\": \"\",\"originalPrice\": 3788,\"price\": 3788,\"productCategoryId\": 26,\"productSn\": \"TEST001\",\"stock\": 100,\"unit\": \"件\",\"publishStatus\": 1,\"deleteStatus\": 0}"
+        },
+        "url": {
+          "raw": "{{url}}/product/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "新增商品（标价为0））",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"brandId\": 26,\"name\": \"\",\"originalPrice\": 0,\"price\": 0,\"productCategoryId\": 26,\"productSn\": \"TEST001\",\"stock\": 100,\"unit\": \"件\",\"publishStatus\": 1,\"deleteStatus\": 0}"
+        },
+        "url": {
+          "raw": "{{url}}/product/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "新增商品（标价为-1）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"brandId\": 26,\"name\": \"测试商品\",\"originalPrice\": -1,\"price\": -1,\"productCategoryId\": 26,\"productSn\": \"TEST001\",\"stock\": 100,\"unit\": \"件\",\"publishStatus\": 1,\"deleteStatus\": 0}"
+        },
+        "url": {
+          "raw": "{{url}}/product/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "商品上架",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/product/update/publishStatus?ids=26&publishStatus=1",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "update",
+            "publishStatus"
+          ],
+          "query": [
+            {
+              "key": "ids",
+              "value": "26"
+            },
+            {
+              "key": "publishStatus",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "查询数据（分页）",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/product/list",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "创建秒杀",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"createTime\": \"2026-06-25\",\"endDate\": \"2026-06-26\",\"id\": 0,\"startDate\": \"2026-06-25\",\"status\": 0,\"title\": \"测试秒杀\"}"
+        },
+        "url": {
+          "raw": "{{url}}/flash/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "flash",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "创建秒杀（结束时间早于开始时间）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"createTime\": \"2026-06-25\",\"endDate\": \"2026-06-24\",\"id\": 0,\"startDate\": \"2026-06-25\",\"status\": 0,\"title\": \"测试秒杀\"}"
+        },
+        "url": {
+          "raw": "{{url}}/flash/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "flash",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "查看售后信息",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "id",
+              "value": "1",
+              "type": "text",
+              "uuid": "665ffb2b-d6a1-4124-b242-dfa5e84cb3f8"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{url}}/returnApply/list",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returnApply",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "查询订单（按页数）",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}/order/list?pageNum=1&pageSize=1",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "order",
+            "list"
+          ],
+          "query": [
+            {
+              "key": "pageNum",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "同意退款",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"refundId\":1,\"status\":1}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/returnApply/update/status/15",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "returnApply",
+            "update",
+            "status",
+            "15"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "登录（安全测试）",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"' OR '1'='1' --\", \"password\":\"macro123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/admin/login",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "admin",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "篡改价格（安全测试）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"价格篡改测试\",\r\n  \"price\": -100,\r\n  \"stock\": 100,\r\n  \"productCategoryId\": 26,\r\n  \"brandId\": 26,\r\n  \"productSn\": \"TEST_SEC_001\"\r\n}"
+        },
+        "url": {
+          "raw": "{{url}}/product/create",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "product",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": ""
+    }
+  ]
+}
