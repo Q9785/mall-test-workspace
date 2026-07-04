@@ -42,25 +42,25 @@ mall 是一款基于 Spring Boot + Vue 的开源电商系统，包含 B端后台
 > 完整缺陷清单请查看：[缺陷发现清单](./docs/缺陷发现清单.md)
 
 
-##  目录结构
+## 目录结构
 mall-test-workspace/
-├── README.md
-├── docs/
-│ ├── 测试范围与策略.md
-│ ├── 功能核心测试总结.md
-│ ├── 接口核心测试总结.md
-│ ├── 缺陷发现清单.md
-│ ├── 安全弱网专项说明.md
-│ └── 测试报告.md
-├── images/
-│ ├── XMind 导图 /
-│ ├── Postman 截图 /
-│ ├── JMeter 性能截图 /
-│ ├── Bug 证据_禅道 /
-│ └── 安全性_兼容性_弱网 /
-├── postman/
-│ ├── mall-admin.json
-│ ├── mall-portal.json
-│ └── mall-env.json
-└── testcases/
-└── test_login_and_cart.py
+  README.md
+  docs/
+    测试范围与策略.md
+    功能核心测试总结.md
+    接口核心测试总结.md
+    缺陷发现清单.md
+    安全弱网专项说明.md
+    测试报告.md
+  images/
+    XMind导图/
+    Postman截图/
+    JMeter性能截图/
+    Bug证据_禅道/
+    安全性_兼容性_弱网/
+  postman/
+    mall-admin.json
+    mall-portal.json
+    mall-env.json
+  testcases/
+    test_login_and_cart.py
